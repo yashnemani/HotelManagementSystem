@@ -8,7 +8,8 @@ function confirm(){
 			  type: "POST",
 			  url: 'menu/newOrder/'+room+'/',
 			  data: JSON.stringify(items),
-			  contentType: "application/json; charset=utf-8"
+			  contentType: "application/json; charset=utf-8",
+				  success: function(){$('#order').html("<h3>Order Info</h3><p id='msg' class='msg'>Order Confirmed!</p>");}
 			});	
 	}
 }
