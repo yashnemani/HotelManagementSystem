@@ -1,0 +1,61 @@
+ul{
+	list-style-type: none;
+} 
+.menu ul{
+	margin: 0px;
+	padding: 5px;
+}
+.menu ul li{
+	margin: 0px;
+	padding: 0px;
+	border-bottom: 1px solid #5e5e5e;
+    min-height: 50px;
+    margin-bottom: 5px;
+}
+.menu{
+width: 50%;
+display: block;
+margin: 0 auto;
+background-color: #eafff7;	
+border: 2px solid #5e5e5e;
+border-top: none;
+}
+	.menu h1,h2,h3,h4,h5,h6,p{
+	margin: 0px;
+	padding: 0px;
+}
+.side{
+	float:left;	
+	border: 1px solid #5e5e5e;
+}
+.side ul{
+	float:left;	
+	margin: 0px;
+	padding: 0px;
+}
+.side ul li{
+	background-color: #42f4eb;
+	margin: 0px;
+	padding: 0px;
+	border-bottom: 1px solid #5e5e5e;
+	margin-bottom: 1px;
+}
+#price{
+	float: right;
+	color: #ea4155;
+}
+#add{
+	float: right;
+}
+#order{
+	float: right;
+	border: 2px solid #ea4155;
+	background-color: #4c4c4c;
+	color: #eeeeee;
+}
+input{
+	width: 40px;
+	background-color: #5e5e5e;
+	color: #ffffff;
+	border: 1px solid #ff9224;font-family: proxima-nova;
+}
