@@ -143,4 +143,35 @@ model.addAttribute("reservations", reservations);
 return "reservations";}
 
 }
+@RequestMapping(value="/edit/{id}/{action}/",method=GET)
+public String edit(Model model,@PathVariable int id,@PathVariable String action){
+	Reservation res = new Reservation();
+	res = rep.findOne(id);
+	model.addAttribute("action", action);
+	model.addAttribute("res", res);
+	return "editReservation";
+}
+@RequestMapping(value="/change/edit",method=POST)
+public String edits(Model model, WebRequest req) throws ParseException{
+	Reservation res = new Reservation();
+	res.setRes_id(Integer.parseInt(req.getParameter("res_id")));
+	res.setC_id(Integer.parseInt(req.getParameter("c_id")));
+	res.setRoom(Integer.parseInt(req.getParameter("room")));
+	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	res.setStart(df.parse(req.getParameter("start")));
+	res.setEnd(df.parse(req.getParameter("end")));
+	res.setStatus(req.getParameter("status"));
+	res.setRate(Double.parseDouble(req.getParameter("rate")));
+	rep.save(res);
+	model.addAttribute("res", res);
+	return "reservation";
+}
+@RequestMapping(value="/change/delete/{id}/",method=POST)
+public String delete(Model model, @PathVariable int id){
+	rep.delete(id);
+	List<Reservation> reservations =  new ArrayList<>();
+	rep.findAll().forEach((r)->reservations.add(r));
+	model.addAttribute("reservations", reservations);
+	return "reservations";
+}
 }

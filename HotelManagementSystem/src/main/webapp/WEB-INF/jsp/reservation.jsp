@@ -24,8 +24,8 @@
 <h3><span id="label">Status</span> <br><c:out value="${res.status}"></c:out></h3> 
 <h3><span id="label">Rate</span><br> <c:out value="${res.rate}"></c:out></h3> 
 </div>
- <a class="out" href="#"> Edit Reservation</a>
- <a class="out" style="float:right;" href="#"> Delete Reservation</a>
+ <a class="out" href="http://localhost:8080/reservations/edit/${res.res_id}/edit/"> Edit Reservation</a>
+ <a class="out" style="float:right;" href="http://localhost:8080/reservations/edit/${res.res_id}/delete/"> Delete Reservation</a>
  <div align = "center"> <a class="out" href="http://localhost:8080/reservations/checkin/${res.res_id}/">  CheckIn</a><br><a class="out" href="http://localhost:8080/reservations/checkout/${res.res_id}/">  CheckOut</a> </div>
 </div>
 </body>
