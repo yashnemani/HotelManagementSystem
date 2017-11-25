@@ -41,7 +41,8 @@ input{
 }
 a{
 	text-decoration:none;
-	color:#808080;
+	color:#c8c076; 
+	/*#FF851B*/
 }
  a.out{
 	font-size: 25px;
@@ -54,7 +55,7 @@ a.pg{
 }
 
 a:hover{
-	color:#FF851B;
+	color:#808080;
 }
 th {
 	font-weight: bold;

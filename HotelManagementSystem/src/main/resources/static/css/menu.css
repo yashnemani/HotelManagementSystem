@@ -9,24 +9,28 @@ ul{
 	margin: 0px;
 	padding: 0px;
 	border-bottom: 1px solid #5e5e5e;
-    min-height: 50px;
-    margin-bottom: 5px;
+    min-height: 40px; 
+    /* margin-bottom: 5px; */
 }
 .menu{
 width: 50%;
 display: block;
 margin: 0 auto;
-background-color: #eafff7;	
-border: 2px solid #5e5e5e;
-border-top: none;
+background-color: #67757c;	
+border: 1px solid #5e5e5e;
 }
 	.menu h1,h2,h3,h4,h5,h6,p{
 	margin: 0px;
 	padding: 0px;
+	color: #d5d5d5;
 }
 .side{
 	float:left;	
 	border: 1px solid #5e5e5e;
+}
+.side h3{
+	color: #d5d5d5;
+	background-color: #343434;
 }
 .side ul{
 	float:left;	
@@ -34,7 +38,7 @@ border-top: none;
 	padding: 0px;
 }
 .side ul li{
-	background-color: #42f4eb;
+	background-color: #2685a1;
 	margin: 0px;
 	padding: 0px;
 	border-bottom: 1px solid #5e5e5e;
@@ -42,7 +46,7 @@ border-top: none;
 }
 #price{
 	float: right;
-	color: #ea4155;
+	color: #e59e34;
 }
 #add{
 	float: right;
@@ -58,4 +62,10 @@ input{
 	background-color: #5e5e5e;
 	color: #ffffff;
 	border: 1px solid #ff9224;font-family: proxima-nova;
+}
+.edlink{
+	float:left;
+}
+.delink{
+	float: right;
 }

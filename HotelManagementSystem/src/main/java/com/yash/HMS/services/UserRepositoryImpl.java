@@ -40,8 +40,10 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
 				  p = null;
 				}
 	
-		if(p==null)
-		return u;
+		if(p==null){
+			u=null;
+			return u;	
+		}
 		if(p.equals(pass)){
 			String s = "select  * from users where user=?";
 			u = (User) jdbcTemplate.queryForObject(s, new Object[] {user},new RowMapper() {

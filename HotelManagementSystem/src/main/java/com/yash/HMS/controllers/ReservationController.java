@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 import com.yash.HMS.models.PastReservation;
@@ -38,6 +39,11 @@ private OrderRepository orep;
 PastReservationRepository prep;
 @Autowired
 RoomRepository rrep;
+List<Reservation> reservations =  new ArrayList<>();
+private void reservations(){
+	reservations.clear();
+		rep.findAll().forEach((r)->reservations.add(r));
+}
 @RequestMapping(method=GET)
 public String getReservations(Model model, HttpServletRequest req){
 	HttpSession session =  req.getSession(false); 
@@ -47,11 +53,17 @@ public String getReservations(Model model, HttpServletRequest req){
 		return "index";	
 	}
 	else{
-	List<Reservation> reservations =  new ArrayList<>();
-	rep.findAll().forEach((r)->reservations.add(r));
+		reservations();
 	model.addAttribute("reservations", reservations);
 	return "reservations";
 	}	
+}
+@RequestMapping(value="/search/{q}/",method=GET)
+public @ResponseBody List<Reservation> search(@PathVariable String q){
+	List<Reservation> resvs = new ArrayList<>();
+	if(reservations.size()==0)
+	reservations();
+return resvs;
 }
 @RequestMapping(value="/checkout/{id}/",method=GET)
 public String checkout(Model model, @PathVariable int id, HttpServletRequest req){
@@ -72,13 +84,13 @@ public String checkout(Model model, @PathVariable int id, HttpServletRequest req
 	System.out.println("Total Room Charge: "+tot);
 	System.out.println("Total Meals Amount: "+mealAmount);
 	rep.delete(id);
+	double total = tot+mealAmount;
 	PastReservation pas = new PastReservation();
 	pas.setRes_id(id);pas.setC_id(res.getC_id());pas.setRoom(res.getRoom());
-	pas.setStart(res.getStart());pas.setEnd(res.getEnd());pas.settotal(tot);pas.setStatus("Checked Out");
+	pas.setStart(res.getStart());pas.setEnd(res.getEnd());pas.settotal(total);pas.setStatus("Checked Out");
 	prep.save(pas);
 	rrep.setStatus(res.getRoom(), "Vacant");
-	List<Reservation> reservations =  new ArrayList<>();
-	rep.findAll().forEach((r)->reservations.add(r));
+	reservations();
 	model.addAttribute("reservations", reservations);
 	return "reservations";}
 }
@@ -137,8 +149,7 @@ try {
 res.setStatus(req.getParameter("status"));
 res.setRoom(Integer.parseInt(req.getParameter("room")));
 rep.save(res);
-List<Reservation> reservations =  new ArrayList<>();
-rep.findAll().forEach((r)->reservations.add(r));
+reservations();
 model.addAttribute("reservations", reservations);
 return "reservations";}
 
@@ -169,8 +180,7 @@ public String edits(Model model, WebRequest req) throws ParseException{
 @RequestMapping(value="/change/delete/{id}/",method=POST)
 public String delete(Model model, @PathVariable int id){
 	rep.delete(id);
-	List<Reservation> reservations =  new ArrayList<>();
-	rep.findAll().forEach((r)->reservations.add(r));
+	reservations();
 	model.addAttribute("reservations", reservations);
 	return "reservations";
 }

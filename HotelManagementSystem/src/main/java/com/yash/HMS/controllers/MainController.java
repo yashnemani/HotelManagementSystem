@@ -142,12 +142,10 @@ public String login(Model model, HttpServletRequest req){
 		HttpSession session = req.getSession(true);
 			String user = req.getParameter("user");
 			String pass = req.getParameter("pass");
-			System.out.println(user+" "+pass);
 			User u = new User();
 				u = rep.verifyLogin(user, pass);
 				
-			if (u!=null){
-				System.out.println(u.getfName());
+			if (u.getfName()!=null){
 			session.setAttribute("users", u);
 			session.setAttribute("log", "true");
 				model.addAttribute("hello","Hello Welcome to Adobe Hotels Management System!");
