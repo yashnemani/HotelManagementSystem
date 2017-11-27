@@ -28,7 +28,7 @@
 <h3>Check If Customer Exists. Enter Mobile Number</h3>
 <form id="check" >
 <fieldset>
-<label>Customer Phone:</label><input type="number" id="phone" name="phone" min="7000000000" max="9999999999"required><br>
+<label>Customer Phone:</label><input type="number" id="phone" name="phone" min="1000000000" max="9999999999"required><br>
 <input type="submit" value="check" class="button">
 <div id="create">
 <p>Customer does not exist!</p>
