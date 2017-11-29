@@ -44,8 +44,8 @@ private void reservations(){
 	reservations.clear();
 		rep.findAll().forEach((r)->reservations.add(r));
 }
-@RequestMapping(method=GET)
-public String getReservations(Model model, HttpServletRequest req){
+@RequestMapping(value="/{action}", method=GET)
+public String getReservations(Model model, HttpServletRequest req, @PathVariable String action){
 	HttpSession session =  req.getSession(false); 
 	if(session==null){
 		model.addAttribute("hello","Hello Welcome to Adobe Hotels Management System!");
@@ -53,9 +53,19 @@ public String getReservations(Model model, HttpServletRequest req){
 		return "index";	
 	}
 	else{
+		String page = "index";
+		if(action.equals("current")){
 		reservations();
 	model.addAttribute("reservations", reservations);
-	return "reservations";
+ page = "reservations";
+}
+		else if(action.equals("past")){
+			List<PastReservation> reservations1 =  new ArrayList<>();
+			prep.findAll().forEach((p)->reservations1.add(p));
+			model.addAttribute("reservations", reservations1);
+			 page = "PastReservations";
+		}
+		return page;
 	}	
 }
 @RequestMapping(value="/search/{q}/",method=GET)
@@ -112,8 +122,8 @@ public String checkin(Model model, @PathVariable int id, HttpServletRequest req)
 		return "reservation";	
 	}	
 }
-@RequestMapping(value="/reservation/{id}",method=GET)
-public String getReservation(Model model,@PathVariable int id, HttpServletRequest req){
+@RequestMapping(value="/reservation/{id}/{action}",method=GET)
+public String getReservation(Model model,@PathVariable int id,@PathVariable String action, HttpServletRequest req){
 	HttpSession session =  req.getSession(false); 
 	if(session==null){
 		model.addAttribute("hello","Hello Welcome to Adobe Hotels Management System!");
@@ -121,10 +131,22 @@ public String getReservation(Model model,@PathVariable int id, HttpServletReques
 		return "index";	
 	}
 	else{
+		String page = "index";
+		if(action.equals("current")){
 Reservation res = new Reservation();
 res = rep.findOne(id);
 model.addAttribute("res", res);
-	return "reservation";}
+page = "reservation";
+		}
+	
+	else if(action.equals("past")){
+		PastReservation res = new PastReservation();
+		res = prep.findOne(id);
+		model.addAttribute("res", res);	
+	page = "PastReservation";
+	}
+	return page;
+	}
 }
 @RequestMapping(value="/confirmReservation",method=POST)
 public String newReservation( HttpServletRequest req, Model model){

@@ -19,12 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.WebRequest;
 
 import com.yash.HMS.models.Customer;
+import com.yash.HMS.models.Report;
 import com.yash.HMS.models.Room;
 import com.yash.HMS.models.User;
 import com.yash.HMS.repositories.CustomerRepository;
+import com.yash.HMS.repositories.ReportRepository;
 import com.yash.HMS.repositories.ReservationRepository;
 import com.yash.HMS.repositories.RoomRepository;
 import com.yash.HMS.repositories.UserRepository;
@@ -40,6 +41,8 @@ public class MainController {
 	private CustomerRepository cusrep;
 	@Autowired
 	private ReservationRepository rrep;
+	@Autowired
+	private ReportRepository rerep;
 	@RequestMapping(value="/home",method=GET)
 public String home(Model model){
 	model.addAttribute("hello","Hello Welcome to Adobe Hotels Management System!");
@@ -137,6 +140,22 @@ public String create( Model model, HttpServletRequest req) throws SQLException{
 		model.addAttribute("cus",customer);
 	return "customer";}
 }
+	
+	@RequestMapping(value="/reports",method=GET)
+public String reports(Model model,HttpServletRequest req){
+		HttpSession session =  req.getSession(false); 
+		if(session==null){
+			model.addAttribute("hello","Hello Welcome to Adobe Hotels Management System!");
+			model.addAttribute("error", "Login to continue!");
+			return "index";	
+		}
+		else{
+			List<Report> reports = new ArrayList<Report>();
+	rerep.findAll().forEach((r)->reports.add(r));
+			model.addAttribute("reports",reports);
+	return "IncomeReports";}
+}
+	//Login and Logout Control
 	@RequestMapping(value="/login",method=POST)
 public String login(Model model, HttpServletRequest req){
 		HttpSession session = req.getSession(true);
@@ -157,7 +176,8 @@ public String login(Model model, HttpServletRequest req){
 				return "index";	
 			}
 
-}	
+}
+	
 	@RequestMapping(value="/login",method=GET)
 	public String log(Model model, HttpServletRequest req){
 		HttpSession session = req.getSession(false);
