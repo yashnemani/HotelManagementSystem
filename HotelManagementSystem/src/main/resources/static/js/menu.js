@@ -9,7 +9,7 @@ function confirm(){
 			  url: 'http://localhost:8080/menu/newOrder/'+room+'/',
 			  data: JSON.stringify(items),
 			  contentType: "application/json; charset=utf-8",
-				  success: function(){$('#order').html("<h3>Order Info</h3><p id='msg' class='msg'>Order Confirmed!</p>");}
+				  success: function(){$('#order').html("<h3>Order Info</h3><p id='msg' class='msg'>Order Confirmed!</p><p>Refresh to start new order</p>");}
 			});	
 	}
 }
@@ -20,6 +20,7 @@ function order(id, qty, amount) {
 }
 var items = new Array();
 var c_count = 0;
+var types = "";
 function add(id, name, price){
 	/* items.add(name); */
 	var qt = $('#'+id).val();
@@ -59,10 +60,11 @@ function rem(id){
 	$('#o'+id).remove();
 }
 function sel(type){
-	var type = type;
+	 types = $('.'+type).html();
 	$.getJSON("http://localhost:8080/menu/type/"+type+"/", successfn);
 }
 function successfn(result){
+	$('#menutype').html(types);
 	var out = "<ul> ";
 	for(var r in result){
 	out += "<li><div id='add'><button  onclick='add("+result[r].id+",\""+result[r].name+"\","+result[r].price+")'>Add</button><input type='number' min='1' value='1' id='"+result[r].id+"'></div><h4>"+result[r].name+"</h4><p id='price'>$ "+result[r].price+"</p></li>";

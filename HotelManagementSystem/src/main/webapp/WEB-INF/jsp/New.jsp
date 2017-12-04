@@ -39,7 +39,9 @@
 </form>
 </div>
 </div>
+
 <div align="center" id="rooms">
+<h3>Available Rooms Today</h3>
 <c:forEach items="${rooms}" var="r">
 <a onclick="sel(${r.num})">${r.num}</a><br>
 </c:forEach>

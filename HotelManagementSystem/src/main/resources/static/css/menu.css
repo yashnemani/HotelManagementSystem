@@ -19,7 +19,12 @@ margin: 0 auto;
 background-color: #67757c;	
 border: 1px solid #5e5e5e;
 }
-	.menu h1,h2,h3,h4,h5,h6,p{
+	.menu h1,h2{
+	margin: 0px;
+	padding: 0px;
+	color: #67757c;
+}
+.menu h3,h4,h5,h6,p{
 	margin: 0px;
 	padding: 0px;
 	color: #d5d5d5;
@@ -31,6 +36,7 @@ border: 1px solid #5e5e5e;
 .side h3{
 	color: #d5d5d5;
 	background-color: #343434;
+	margin: 0px;
 }
 .side ul{
 	float:left;	

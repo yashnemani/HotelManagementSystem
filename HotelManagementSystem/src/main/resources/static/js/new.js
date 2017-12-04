@@ -46,7 +46,7 @@ function newcus(e){
 		$('#customer').html(q);
 		});
 	function successfn(result){
-	var out = " ";
+	var out = "<h3>Available rooms on selected dates</h3>";
 	for(var r in result){
 	out += "<a onclick='sel("+result[r].num+")'>"+result[r].num+"</a><br>";
 	}

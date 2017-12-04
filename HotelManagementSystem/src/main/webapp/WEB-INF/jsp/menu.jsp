@@ -17,10 +17,10 @@
 <div class="side">
 <h3>MENU</h3>
 <ul>
-<li><a onclick="sel('app')">Appetizers</a></li>
-<li><a onclick="sel('main')">Maincourse</a></li>
-<li><a onclick="sel('des')">Desserts</a></li>
-<li><a onclick="sel('bev')">Beverages</a></li>
+<li><a class="app" onclick="sel('app')">Appetizers</a></li>
+<li><a class="main" onclick="sel('main')">Maincourse</a></li>
+<li><a class="des" onclick="sel('des')">Desserts</a></li>
+<li><a class="bev" onclick="sel('bev')">Beverages</a></li>
 </ul>
 </div>
 <div id="order">
@@ -28,6 +28,7 @@
 </div>
 <div align="center">
 <h3>Choose the Items from Menu below!</h3>
+<h2 id="menutype"></h2>
 <div class="menu" id="items">
 <ul >
 <c:forEach items="${menu}" var="m">
